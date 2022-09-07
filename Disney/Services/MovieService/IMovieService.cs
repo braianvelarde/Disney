@@ -13,7 +13,7 @@ namespace Disney.Services.MovieService
 
         Task<Response<List<GetMovieDTO>>> AddMovie(AddMovieDTO newMovie);
 
-        Task<Response<List<GetMovieDTO>>> UpdateMovie(UpdateMovieDTO updatedMovie);
+        Task<Response<GetMovieDTO>> UpdateMovie(UpdateMovieDTO updatedMovie);
 
         Task<Response<List<GetMovieDTO>>> DeleteMovie(int id);
     }

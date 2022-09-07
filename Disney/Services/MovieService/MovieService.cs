@@ -144,9 +144,33 @@ namespace Disney.Services.MovieService
             return response;
         }
 
-        public Task<Response<List<GetMovieDTO>>> UpdateMovie(UpdateMovieDTO updatedMovie)
+        public async Task<Response<GetMovieDTO>> UpdateMovie(UpdateMovieDTO updatedMovie)
         {
-            throw new NotImplementedException();
+            Response<GetMovieDTO> serviceResponse = new Response<GetMovieDTO>();
+            try
+            {
+                var movie = await _context.Movies.FirstOrDefaultAsync(c => c.Id == updatedMovie.Id);
+                if (movie == null)
+                {
+                    serviceResponse.Message = "Character not found";
+                }
+                else
+                {
+                    movie.Title = updatedMovie.Title;
+                    movie.CreationDate = updatedMovie.CreationDate;
+                    movie.Rating = updatedMovie.Rating;
+                    movie.GenreId = updatedMovie.GenreId;
+                    movie.Image = updatedMovie.Image;
+                    await _context.SaveChangesAsync();
+                    serviceResponse.Data = _mapper.Map<GetMovieDTO>(movie);
+                }
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+            return serviceResponse;
         }
     }
 }

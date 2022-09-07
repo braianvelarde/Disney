@@ -151,6 +151,7 @@ namespace Disney.Services.CharacterService
                     character.Weigth = updatedCharacter.Weigth;
                     character.Bio = updatedCharacter.Bio;
                     character.Image = updatedCharacter.Image;
+                    await _context.SaveChangesAsync();
                     serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
                 }
 
