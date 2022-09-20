@@ -8,7 +8,7 @@ namespace Disney.Services.MailService
         async Task ISendEmail.SendEmail(string email, string userName)
         {
             var client = new SendGridClient(
-                "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");
+                "************************************************");
             var from = new EmailAddress("braianvelarde94@hotmail.com", "Braian Velarde");
             var subject = "Welcome to Alkemy Disney!";
             var to = new EmailAddress(email, userName);
